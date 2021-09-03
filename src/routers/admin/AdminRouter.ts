@@ -14,7 +14,7 @@ class StoryRouter {
     }
 
     private _configure() {
-        this._router.put("/story", this._controller.updateStory);
+        this._router.put("/story/:storyId", this._controller.updateStory);
         this._router.get("/listall", this._controller.listAllStories);
     }
 }
