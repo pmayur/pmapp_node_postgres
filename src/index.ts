@@ -27,6 +27,7 @@ createConnection({
     password: process.env.DBPASSWORD,
     database: process.env.DBNAME,
     entities: [__dirname + '/entities/*'],
+    synchronize: true
 }).then(() => {
     console.log('postgres database connected')
 })
