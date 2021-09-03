@@ -1,4 +1,5 @@
 import { Router } from "express";
+import MiddlewareService from "../services/MiddlewareService";
 import AdminRouter from "./admin/AdminRouter";
 import AuthRouter from "./auth/AuthRouter";
 import DocsRouter from "./docs/DocsRouter";
@@ -22,8 +23,8 @@ class MainRouter {
     private _configure() {
         this._router.use("/docs", this._docsRouter);
         this._router.use("/auth", this._authRouter);
-        this._router.use("/story", this._storyRouter);
-        this._router.use("/admin", this._adminRouter);
+        this._router.use("/story",MiddlewareService.verifyUser, this._storyRouter);
+        this._router.use("/admin",MiddlewareService.verifyAdmin, this._adminRouter);
     }
 }
 
