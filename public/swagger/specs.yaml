@@ -3,6 +3,8 @@ tags:
       description: public facing unauthenticated APIs used for user authentication
     - name: User Story Management
       description: authenticated user apis for managing stories
+    - name: Admin API's
+      description: apis which require admin authentication
 components:
     schemas:
         CreateStoryBody:

@@ -1,0 +1,57 @@
+paths:
+    /admin/story/{storyId}:
+        put:
+            tags:
+                - Admin API's
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: path
+                  name: storyId
+                  schema:
+                    type: string
+                    example: 'b86ddb87-4800-451b-921d-05d428e2a288'
+                  description: storyId to update
+            summary: API to create a story
+            operationId: createStory
+            description: This API sends
+            responses:
+                "200":
+                    description: Story Created Successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/AccessTokenResponse"
+                "409":
+                    description: Invalid/Incomplete fields
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/InvalidFields"
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/CreateStoryBody"
+    /admin/listall:
+        get:
+            tags:
+                - Admin API's
+            security:
+                - bearerAuth: []
+            summary: API to get all stories
+            operationId: getMyStories
+            description: This API sends
+            responses:
+                "200":
+                    description: All Stories
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/AccessTokenResponse"
+                "409":
+                    description: Invalid/Incomplete fields
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/InvalidFields"
