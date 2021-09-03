@@ -1,0 +1,59 @@
+paths:
+    /auth/signup:
+        post:
+            tags:
+                - User Authentication
+            summary: Sign Up API for user and admin.
+            operationId: signup
+            description: This API sends
+            responses:
+                "200":
+                    description: Sign Up success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/AccessTokenResponse"
+                "409":
+                    description: User already exists
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/UserAlreadyExistError"
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/SignUpBody"
+    /auth/login:
+        post:
+            tags:
+                - User Authentication
+            summary: Login API for user and admin
+            operationId: login
+            description: This api responds with accesstoken if email id and password are valid.
+            responses:
+                "200":
+                    description: email id and password are valid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/AccessTokenResponse"
+                "409":
+                    description: "Bad request, some or all request fields are missing"
+                    content:
+                        application/json:
+                            schema:
+                                oneOf:
+                                    - $ref: "#/components/schemas/UserDoesNotExistError"
+                                    - $ref: "#/components/schemas/InvalidCredentials"
+                            examples:
+                                "Fields are incomplete":
+                                    $ref: "#/components/schemas/UserDoesNotExistError/example"
+                                "Credentials are incorrect":
+                                    $ref: "#/components/schemas/InvalidCredentials/example"
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/LoginBody"
+                description: email id and password
