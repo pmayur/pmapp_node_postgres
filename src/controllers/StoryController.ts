@@ -6,8 +6,14 @@ import { HTTPBadRequestError } from "../util/ErrorService";
 import ValidatorService from "../util/ValidatorService";
 
 class StoryController {
-    listUserStories(arg0: string, listUserStories: any) {
-        throw new Error("Method not implemented.");
+    async listUserStories(req: Request, res: Response, next: NextFunction) {
+        try {
+            const userId =  (<AuthenticatedRequest>req).currentUser.userId;
+            const response = await StoryService.getAllStories(userId);
+            res.send(response);
+        } catch (error) {
+            next(error)
+        }
     }
 
     async createStory(req: Request, res: Response, next: NextFunction) {
@@ -49,6 +55,7 @@ class StoryController {
                 userId: (<AuthenticatedRequest>req).currentUser.userId
             });
 
+            console.log(response);
             res.send(response);
         } catch (error) {
             next(error);
