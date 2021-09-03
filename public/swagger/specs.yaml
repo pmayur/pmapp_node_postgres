@@ -1,8 +1,32 @@
 tags:
     - name: User Authentication
       description: public facing unauthenticated APIs used for user authentication
+    - name: User Story Management
+      description: authenticated user apis for managing stories
 components:
     schemas:
+        CreateStoryBody:
+            type: object
+            properties:
+                summary:
+                    type: string
+                description:
+                    type: string
+                type:
+                    type: string
+                complexity:
+                    type: string
+                status:
+                    type: string
+                workingHrsRequired:
+                    type: string
+            example:
+                type: 'feature'
+                summary: 'this requires creating a new feature'
+                description: 'a sample description for a new task'
+                complexity: 'low'
+                status: 'new'
+                workingHrsRequired: '3'
         SignUpBody:
             type: object
             properties:
@@ -75,3 +99,16 @@ components:
             example:
                 status: "error"
                 message: "Credentials are invalid"
+        InvalidFields:
+            type: object
+            required:
+                - status
+                - message
+            properties:
+                status:
+                    type: string
+                message:
+                    type: string
+            example:
+                status: "error"
+                message: "Invalid fields input"

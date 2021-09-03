@@ -1,0 +1,28 @@
+paths:
+    /story/create:
+        post:
+            tags:
+                - User Story Management
+            security:
+                - bearerAuth: []
+            summary: API to create a story
+            operationId: createStory
+            description: This API sends
+            responses:
+                "200":
+                    description: Story Created Successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/AccessTokenResponse"
+                "409":
+                    description: Invalid/Incomplete fields
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/InvalidFields"
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/CreateStoryBody"
