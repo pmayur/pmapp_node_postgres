@@ -5,32 +5,36 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     Column,
-    OneToMany,
+    ManyToOne,
 } from "typeorm";
-import { Story } from "./Story";
+import { User } from ".";
+import { COMPLEXITY, TYPE, STATUS } from "../util/Enums";
 
-@Entity("User")
-export class User extends BaseEntity {
+@Entity("Story")
+export class Story extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
     @Column({ nullable: false })
-    firstName: string;
+    summary: string;
 
     @Column({ nullable: false })
-    lastName: string;
+    description: string;
 
     @Column({ nullable: false })
-    email: string;
+    type: TYPE;
 
-    @Column({ nullable: false })
-    password: string;
+    @Column({ nullable: false, default: COMPLEXITY.LOW })
+    complexity: COMPLEXITY;
 
-    @Column({ nullable: false, default: false })
-    isAdmin: string;
+    @Column({ nullable: false, default: STATUS.NEW })
+    status: STATUS;
 
-    @OneToMany(() => Story, story => story.user)
-    stories: Story[];
+    @Column({ nullable: false, default: 1})
+    workingHrsRequired: number;
+
+    @ManyToOne(() => User, user => user.stories)
+    user: User;
 
     @CreateDateColumn({
         nullable: false,
