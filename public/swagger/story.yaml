@@ -26,3 +26,25 @@ paths:
                     application/json:
                         schema:
                             $ref: "#/components/schemas/CreateStoryBody"
+    /story/list:
+        get:
+            tags:
+                - User Story Management
+            security:
+                - bearerAuth: []
+            summary: API to get all stories
+            operationId: getMyStories
+            description: This API sends
+            responses:
+                "200":
+                    description: All Stories
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/AccessTokenResponse"
+                "409":
+                    description: Invalid/Incomplete fields
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/InvalidFields"
