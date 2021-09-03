@@ -1,9 +1,21 @@
+import { NextFunction, Request, Response } from "express";
+import { AdminService } from "../services";
+
 class AdminController {
-    updateStory(arg0: string, updateStory: any) {
-        throw new Error("Method not implemented.");
+    updateStory(req: Request, res: Response, next: NextFunction) {
+        try {
+
+        } catch (error) {
+           next(error);
+        }
     }
-    listAllStories(arg0: string, listAllStories: any) {
-        throw new Error("Method not implemented.");
+    async listAllStories(req: Request, res: Response, next: NextFunction) {
+        try {
+            const stories = await AdminService.getAllStories();
+            res.send(stories);
+        } catch (error) {
+           next(error);
+        }
     }
 
 }
