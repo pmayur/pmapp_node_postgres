@@ -1,9 +1,11 @@
-import express, { Router } from "express";
-import { AuthRouter } from ".";
+import { Router } from "express";
+import AuthRouter from "./auth/AuthRouter";
+import StoryRouter from "./story/StoryRouter";
 
 class MainRouter {
     private _router = Router();
     private _authRouter = AuthRouter;
+    private _storyRouter = StoryRouter;
 
     get router() {
         return this._router;
@@ -15,6 +17,7 @@ class MainRouter {
 
     private _configure() {
         this._router.use("/auth", this._authRouter);
+        this._router.use("/story", this._storyRouter);
     }
 }
 
